@@ -20,7 +20,7 @@ docker build . -t censys-kv-client:0.1.0 -f ./kv-test-client/Dockerfile
 
 ### Running
 
-There is an included `docker-compose` file at the root of the repo. You can either run `just up`, or `docker compose up` in order to start the stack. `kv-service` will be available at :8080, and `kv-client` will be available at :8081.
+There is an included `docker-compose` file at the root of the repo. You can either run `just run`, or `docker compose up` in order to start the stack. `kv-service` will be available at :8080, and `kv-client` will be available at :8081.
 
 To test the completeness of the `kv-service`, simply run these commands:
 

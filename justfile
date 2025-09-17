@@ -12,7 +12,6 @@ build-client:
   docker build . -t censys-kv-client:0.1.0 -f ./kv-test-client/Dockerfile
 
 run:
-  docker network inspect censys-kv-network >/dev/null 2>&1 || docker network create --driver bridge censys-kv-network
   docker compose up
 
 down:
