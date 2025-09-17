@@ -7,3 +7,8 @@ services:
     ports:
       - "8081:8081"
     image: censys-kv-client:0.1.0
+
+networks:
+  default:
+    external:
+      name: censys-kv-network

@@ -13,12 +13,12 @@ RUN rm /opt/go1.24.2.linux-amd64.tar.gz
 RUN echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/bash.bashrc
 RUN mkdir -p -m 0600 /root/.ssh && ssh-keyscan github.com >> /root/.ssh/known_hosts
 RUN useradd -r -s /bin/false kv
-# copy in application
-RUN git clone https://github.com/lossdev/censys-kv.git /opt/censys-kv
+# copy in application, also have to cachebust this layer otherwise Docker gets confused
+RUN git clone https://github.com/lossdev/censys-kv.git /opt/censys-kv2
 # build
-WORKDIR /opt/censys-kv/kv-test-client
+WORKDIR /opt/censys-kv2/kv-test-client
 RUN /usr/local/go/bin/go mod tidy 
 RUN /usr/local/go/bin/go build -o ./kv-client ./main.go
-RUN chown -R kv /opt/censys-kv
+RUN chown -R kv /opt/censys-kv2
 # run as kv
-ENTRYPOINT ["sudo", "-u", "kv", "/opt/censys-kv/kv-test-client/kv-client"]
+ENTRYPOINT ["sudo", "-u", "kv", "/opt/censys-kv2/kv-test-client/kv-client"]

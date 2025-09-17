@@ -36,7 +36,7 @@ func setupRouter() *gin.Engine {
 
 func getTestDeletion(c *gin.Context) {
 	client := httpclient.NewClient()
-	res, err := client.Put("http://localhost:8080/key/foo/bar", nil, nil)
+	res, err := client.Put("http://censys-kv-server:8080/key/foo/bar", nil, nil)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "unexpected error calling PUT request: " + err.Error()})
 	}
@@ -45,7 +45,7 @@ func getTestDeletion(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "expected PUT 201 response, received " + strconv.Itoa(res.StatusCode) + " instead"})
 	}
 
-	res2, err := client.Delete("http://localhost:8080/key/foo", nil)
+	res2, err := client.Delete("http://censys-kv-server:8080/key/foo", nil)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "unexpected error calling DELETE request: " + err.Error()})
 	}
@@ -59,7 +59,7 @@ func getTestDeletion(c *gin.Context) {
 
 func getTestOverwrite(c *gin.Context) {
 	client := httpclient.NewClient()
-	res, err := client.Put("http://localhost:8080/key/foo/bar", nil, nil)
+	res, err := client.Put("http://censys-kv-server:8080/key/foo/bar", nil, nil)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "unexpected error calling PUT request: " + err.Error()})
 	}
@@ -68,7 +68,7 @@ func getTestOverwrite(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "expected PUT 201 response, received " + strconv.Itoa(res.StatusCode) + " instead"})
 	}
 
-	res2, err := client.Get("http://localhost:8080/key/foo", nil)
+	res2, err := client.Get("http://censys-kv-server:8080/key/foo", nil)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "unexpected error calling PUT request: " + err.Error()})
 	}
@@ -78,7 +78,7 @@ func getTestOverwrite(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "key was not found"})
 	}
 
-	res3, err := client.Put("http://localhost:8080/key/foo/baz", nil, nil)
+	res3, err := client.Put("http://censys-kv-server:8080/key/foo/baz", nil, nil)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "unexpected error calling PUT request: " + err.Error()})
 	}
@@ -86,7 +86,7 @@ func getTestOverwrite(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "expected PUT 201 response, received " + strconv.Itoa(res.StatusCode) + " instead"})
 	}
 
-	res4, err := client.Get("http://localhost:8080/key/foo", nil)
+	res4, err := client.Get("http://censys-kv-server:8080/key/foo", nil)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "failed ❌", "message": "key was not found: " + err.Error()})
 	}
