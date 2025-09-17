@@ -9,7 +9,7 @@ build-server:
   docker build --no-cache . -t censys-kv-server:0.1.0 -f ./kv-service/Dockerfile
 
 build-client:
-  docker build . -t censys-kv-client:0.1.0 -f ./kv-test-client/Dockerfile
+  docker build --no-cache . -t censys-kv-client:0.1.0 -f ./kv-test-client/Dockerfile
 
 run:
   docker compose up
