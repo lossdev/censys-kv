@@ -1,7 +1,7 @@
 FROM --platform=linux/amd64 debian:bookworm-slim
 LABEL "maintainer"="Brendan Wilson <bmwilson.dev@gmail.com"
 LABEL "version"="0.1"
-LABEL "description"="Censys KV Store Server"
+LABEL "description"="Censys KV Store Client"
 # update, upgrade, set up go
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -16,9 +16,9 @@ RUN useradd -r -s /bin/false kv
 # copy in application
 RUN git clone https://github.com/lossdev/censys-kv.git /opt/censys-kv
 # build
-WORKDIR /opt/censys-kv/kv-service
+WORKDIR /opt/censys-kv/kv-test-client
 RUN /usr/local/go/bin/go mod tidy 
-RUN /usr/local/go/bin/go build -o ./kv-server ./main.go
+RUN /usr/local/go/bin/go build -o ./kv-client ./main.go
 RUN chown -R kv /opt/censys-kv
 # run as kv
-ENTRYPOINT ["sudo", "-u", "kv", "/opt/censys-kv/kv-service/kv-server"]
+ENTRYPOINT ["sudo", "-u", "kv", "/opt/censys-kv/kv-test-client/kv-client"]
